@@ -1,3 +1,15 @@
-# Create T3 App
+# Typesense
 
-This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
+## Install
+
+```
+docker pull typesense/typesense:0.23.1
+```
+
+```
+export TYPESENSE_API_KEY=xyz
+
+mkdir /tmp/typesense-data
+
+docker run -p 8108:8108 -v/tmp/typesense-data:/data typesense/typesense:0.23.1 --data-dir /data --api-key=$TYPESENSE_API_KEY --enable-cors
+```
