@@ -15,7 +15,7 @@ export default class API {
       url += `?${new URLSearchParams(params)}`;
     }
 
-    let res = await axios.get(url);
+    let res = await axios.get<T>(url);
 
     // Validate response and return JSON
     if (res.status !== 200) {
@@ -24,22 +24,10 @@ export default class API {
     return res.data;
   }
 
-  async post<T>(
-    method: string,
-    params:
-      | Record<string, string[] | string>
-      | Record<string, string[] | string>[]
-      | string[]
-  ) {
+  async post<T>(method: string, params: any) {
     let url = `${this.url}/${method}`;
 
-    // let res = await fetch(url, {
-    //   method: "post",
-    //   body: JSON.stringify(params),
-    //   headers: { "content-type": "application/json" },
-    // });
-
-    const res = await axios.post(url, JSON.stringify(params), {
+    const res = await axios.post<T>(url, JSON.stringify(params), {
       headers: { "content-type": "application/json" },
     });
 
