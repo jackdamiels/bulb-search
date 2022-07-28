@@ -1,15 +1,11 @@
-# Typesense
+# TEXTAI
+
+https://github.com/neuml/txtai/
 
 ## Install
 
-```
-docker pull typesense/typesense:0.23.1
-```
+Docker based install
+https://neuml.github.io/txtai/cloud/
 
-```
-export TYPESENSE_API_KEY=xyz
-
-mkdir /tmp/typesense-data
-
-docker run -p 8108:8108 -v/tmp/typesense-data:/data typesense/typesense:0.23.1 --data-dir /data --api-key=$TYPESENSE_API_KEY --enable-cors
-```
+##  Textaijs source
+https://github.com/neuml/txtai.js/tree/master/src

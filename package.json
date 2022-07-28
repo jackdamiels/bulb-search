@@ -9,21 +9,21 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
-    "start:typesense": "docker run -d -p 8108:8108 -v/tmp/typesense-data:/data typesense/typesense:0.23.1 --data-dir /data --api-key=xyz --enable-cors"
+    "build:textai-docker": "cd docker && ./build.sh",
+    "start:textai-api": "docker run -v models:/models -e TRANSFORMERS_CACHE=/models -p 8000:8000 --rm -it txtai-api"
   },
   "dependencies": {
-    "@babel/runtime": "^7.18.9",
     "@prisma/client": "^4.1.0",
     "@trpc/client": "^9.26.2",
     "@trpc/next": "^9.26.2",
     "@trpc/react": "^9.26.2",
     "@trpc/server": "^9.26.2",
+    "axios": "^0.27.2",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "^3.39.2",
     "superjson": "^1.9.1",
-    "typesense": "^1.3.0",
     "zod": "^3.17.3"
   },
   "devDependencies": {
@@ -33,6 +33,7 @@
     "autoprefixer": "^10.4.7",
     "eslint": "8.18.0",
     "eslint-config-next": "12.2.3",
+    "node-fetch": "^3.2.9",
     "postcss": "^8.4.14",
     "prisma": "^4.1.0",
     "tailwindcss": "^3.1.6",
