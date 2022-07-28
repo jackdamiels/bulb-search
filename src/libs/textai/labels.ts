@@ -1,5 +1,10 @@
 import API from "./api";
 
+export interface ReturnTyp {
+  id: number;
+  score: number;
+}
+
 /**
  * txtai labels instance.
  */
@@ -9,8 +14,11 @@ class Labels extends API {
    * {id: value, score: value} sorted by highest score, where id is the index in labels.
    *
    */
-  async label(text: string, labels: string) {
-    return await this.post("label", { text, labels: labels }).catch((e) => {
+  async label(text: string, labels: string[]) {
+    return await this.post<ReturnTyp[]>("label", {
+      text,
+      labels: labels,
+    }).catch((e) => {
       throw e;
     });
   }
