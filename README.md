@@ -1,6 +1,7 @@
 # TEXTAI
 
 https://github.com/neuml/txtai/
+https://neuml.hashnode.dev/build-a-qa-database
 
 ## Install
 
