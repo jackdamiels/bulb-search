@@ -1,4 +1,5 @@
 import API from "./api";
+import { BaseResult } from "./interfaces";
 
 /**
  * txtai embeddings instance.
@@ -13,11 +14,12 @@ export default class Embeddings extends API {
    * @return list of {id: value, score: value}
    */
   async search(query: string, limit = 10) {
-    return await this.get("search", { query: query, limit: `${limit}` }).catch(
-      (e) => {
-        throw e;
-      }
-    );
+    return await this.get<BaseResult[]>("search", {
+      query: query,
+      limit: `${limit}`,
+    }).catch((e) => {
+      throw e;
+    });
   }
 
   /**

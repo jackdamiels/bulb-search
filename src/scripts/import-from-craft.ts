@@ -33,7 +33,8 @@ interface FaqEntry {
 }
 
 export interface IndexableEntry {
-  content: string;
+  id: string;
+  text: string;
   slug: string;
   url: string;
 }
@@ -43,7 +44,7 @@ const processEntries = (entries: FaqEntry[]): IndexableEntry[] => {
   for (const entry of entries) {
     if (isSupportedEntryType(entry.typeId)) {
       const { title, description, slug, url, shortFaq } = entry;
-      let content = `${title}\n${description}`;
+      let text = `${title}\n${description}`;
 
       for (const key in shortFaq) {
         const sfEntry = shortFaq[key];
@@ -51,11 +52,11 @@ const processEntries = (entries: FaqEntry[]): IndexableEntry[] => {
           const { fields } = sfEntry;
           const { question, answer } = fields;
           const sfContent = `${question}\n${answer}`;
-          content += `\n${sfContent}`;
+          text += `\n${sfContent}`;
         }
       }
 
-      indexableEntries.push({ content, slug, url });
+      indexableEntries.push({ id: slug, text, slug, url });
     }
   }
 
