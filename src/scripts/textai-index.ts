@@ -4,7 +4,7 @@ import { getIndexableEntries } from "./import-from-craft";
 const RAW_ENTRIES_PATH = "./src/scripts/entries.json";
 const embeddings = new Embeddings("http://localhost:8000");
 
-const buildEmbedingIndex = async () => {
+export const buildEmbedingIndex = async () => {
   console.log("Preparing indexable entrie...");
   const indexableEntries = getIndexableEntries(RAW_ENTRIES_PATH);
   console.log("Building embeding index from entries...");
@@ -12,17 +12,16 @@ const buildEmbedingIndex = async () => {
   await embeddings.index();
 };
 
-const search = (query: string) => {
-  return embeddings.search(query, 2);
-};
-
-const entryPoint = async () => {
-  const question = "How do I improve my WIFI signal";
-  const answers = await search(question);
-
-  for (const answer of answers) {
-    console.log("And the answer is: ", answer.id, "with score: ", answer.score);
+if (require.main === module) {
+  if (process.argv.length < 3) {
+    console.error("Missing arg, please provide action name");
   }
-};
 
-entryPoint();
+  const action = process.argv[2];
+  if (action === "build-index") {
+    console.log("ajmooo");
+    buildEmbedingIndex();
+  }
+} else {
+  console.log("required as a module");
+}

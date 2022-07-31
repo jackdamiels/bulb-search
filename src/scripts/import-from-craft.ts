@@ -20,7 +20,7 @@ const isSupportedEntryType = (typeId: number) => {
 
 interface FaqSubentry {
   type: "shortFaq";
-  fields: { [key: string]: string };
+  fields: { question: string; answer: string };
 }
 
 interface FaqEntry {
@@ -37,6 +37,8 @@ export interface IndexableEntry {
   text: string;
   slug: string;
   url: string;
+  title: string;
+  description: string;
 }
 
 const processEntries = (entries: FaqEntry[]): IndexableEntry[] => {
@@ -44,19 +46,24 @@ const processEntries = (entries: FaqEntry[]): IndexableEntry[] => {
   for (const entry of entries) {
     if (isSupportedEntryType(entry.typeId)) {
       const { title, description, slug, url, shortFaq } = entry;
-      let text = `${title}\n${description}`;
 
       for (const key in shortFaq) {
         const sfEntry = shortFaq[key];
         if (sfEntry) {
           const { fields } = sfEntry;
+          let text = `${title}\n${description}`;
           const { question, answer } = fields;
           const sfContent = `${question}\n${answer}`;
-          text += `\n${sfContent}`;
+          indexableEntries.push({
+            id: slug,
+            text: sfContent,
+            slug,
+            url,
+            title,
+            description,
+          });
         }
       }
-
-      indexableEntries.push({ id: slug, text, slug, url });
     }
   }
 
