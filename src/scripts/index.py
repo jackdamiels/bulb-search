@@ -48,9 +48,6 @@ def create_embeding_index(documents, save_to):
 
     embeddings.save(save_to)
 
-    result = embeddings.search("WIFI", 1)
-    print(result)
-
 
 def main():
     print(sys.argv)
