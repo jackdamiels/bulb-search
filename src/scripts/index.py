@@ -66,19 +66,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# data = ["US tops 5 million confirmed virus cases",
-#         "Canada's last fully intact ice shelf has suddenly collapsed, forming a Manhattan-sized iceberg",
-#         "Beijing mobilises invasion craft along coast as Taiwan tensions escalate",
-#         "The National Park Service warns against sacrificing slower friends in a bear attack",
-#         "Maine man wins $1M from $25 lottery ticket",
-#         "Make huge profits without work, earn up to $100,000 a day"]
-
-# # Create embeddings index with content enabled. The default behavior is to only store indexed vectors.
-# embeddings = Embeddings(
-#     {"path": "sentence-transformers/nli-mpnet-base-v2", "content": True, "objects": True})
-
-# embeddings.index([(uid, {"text": text, "length": len(text)}, None)
-#                  for uid, text in enumerate(data)])
-
-# print(embeddings.search("select text, score from txtai where similar('hiking danger') and score >= 0.15"))
