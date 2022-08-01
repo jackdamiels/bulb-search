@@ -1,5 +1,6 @@
 import sys
 from txtai.embeddings import Embeddings
+from txtai.app import Application
 
 embeddings = Embeddings(
     {"path": "sentence-transformers/nli-mpnet-base-v2", "content": True})
@@ -8,11 +9,9 @@ embeddings = Embeddings(
 def main():
     question = sys.argv[1]
 
-    embeddings.load("search_index.tar.xz")
-    print("started .....")
-    result = embeddings.search(
-        f"select text, title, slug, score from txtai where similar('{question}') limit 1")
-    print(result[0])
+    app = Application("path: search_index.tar.xz")
+
+    print("Created application")
 
 
 if __name__ == "__main__":
