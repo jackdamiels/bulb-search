@@ -43,10 +43,13 @@ def process_entries(entries):
 def create_embeding_index(documents, save_to):
     embeddings = Embeddings(
         {"path": "sentence-transformers/nli-mpnet-base-v2", "content": True})
-    embeddings.index([(uid, {"text": document['text']}, None)
+    embeddings.index([(uid, {"text": document['text'], "title": document["title"], "slug": document["slug"]}, None)
                      for uid, document in enumerate(documents)])
 
     embeddings.save(save_to)
+
+    result = embeddings.search("WIFI", 1)
+    print(result)
 
 
 def main():
@@ -61,7 +64,6 @@ def main():
         file.close()
 
 
-u
 if __name__ == "__main__":
     main()
 
