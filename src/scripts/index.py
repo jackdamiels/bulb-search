@@ -45,7 +45,6 @@ def create_embeding_index(documents, save_to):
         {"path": "sentence-transformers/nli-mpnet-base-v2", "content": True})
     embeddings.index([(uid, {"text": document['text'], "title": document["title"], "slug": document["slug"]}, None)
                      for uid, document in enumerate(documents)])
-
     embeddings.save(save_to)
 
 

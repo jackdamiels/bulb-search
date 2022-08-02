@@ -1,6 +1,11 @@
 import API from "./api";
 import { BaseResult } from "./interfaces";
 
+export interface BaseIndexDocument {
+  id: string;
+  text: string;
+}
+
 /**
  * txtai embeddings instance.
  */
@@ -45,10 +50,11 @@ export default class Embeddings extends API {
    *
    * @param documents list of {id: value, text: value}
    */
-  async add(documents: { id: string; text: string }[]) {
-    await this.post("add", documents).catch((e) => {
+  async add<T extends BaseIndexDocument>(documents: T[]) {
+    const a = await this.post("add", documents).catch((e) => {
       throw e;
     });
+
   }
 
   /**
